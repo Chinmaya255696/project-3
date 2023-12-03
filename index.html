@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console</title>
+    <style>
+        /* Styling for the entire page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        /* Styling for the heading */
+        h2 {
+            color: #333;
+        }
+
+        /* Styling for the output div */
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: black; /* Change background color to black */
+            color: white; /* Change text color to white */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Heading -->
+    <h2>Console</h2>
+
+    <!-- Output container -->
+    <div id="output"></div>
+
+    <script>
+        // JavaScript functions for various calculations
+
+        // Function to check if a number is prime
+        function isPrime(num) {
+            if (num <= 1) {
+                return false;
+            }
+
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Function to generate Fibonacci series up to n
+        function fibonacci(n) {
+            const series = [0, 1];
+
+            for (let i = 2; i < n; i++) {
+                series[i] = series[i - 1] + series[i - 2];
+            }
+
+            return series.join(', ');
+        }
+
+        // Function to check if a number is a strong number
+        function isStrongNumber(num) {
+            let temp = num;
+            let sum = 0;
+
+            while (temp > 0) {
+                const digit = temp % 10;
+                let factorial = 1;
+
+                for (let i = 1; i <= digit; i++) {
+                    factorial *= i;
+                }
+
+                sum += factorial;
+                temp = Math.floor(temp / 10);
+            }
+
+            return sum === num;
+        }
+
+        // Function to check if a number is an Armstrong number
+        function isArmstrongNumber(num) {
+            const numStr = num.toString();
+            const length = numStr.length;
+            let sum = 0;
+
+            for (let i = 0; i < length; i++) {
+                sum += Math.pow(parseInt(numStr[i]), length);
+            }
+
+            return sum === num;
+        }
+
+        // Function to calculate the factorial of a number
+        function factorial(n) {
+            if (n === 0 || n === 1) {
+                return 1;
+            }
+
+            return n * factorial(n - 1);
+        }
+
+        // Function to convert Fahrenheit to Celsius
+        function fahrenheitToCelsius(fahrenheit) {
+            return (fahrenheit - 32) * (5 / 9);
+        }
+
+        // Function to update the output based on user input
+        function updateOutput(input) {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+
+            const num = parseFloat(input);
+
+            if (!isNaN(num)) {
+                outputDiv.innerHTML += `<p>Is Prime: ${isPrime(num)}</p>`;
+                outputDiv.innerHTML += `<p>Fibonacci Series: ${fibonacci(num)}</p>`;
+                outputDiv.innerHTML += `<p>Is Strong Number: ${isStrongNumber(num)}</p>`;
+                outputDiv.innerHTML += `<p>Is Armstrong Number: ${isArmstrongNumber(num)}</p>`;
+                outputDiv.innerHTML += `<p>Factorial: ${factorial(num)}</p>`;
+                outputDiv.innerHTML += `<p>Fahrenheit to Celsius: ${fahrenheitToCelsius(num)}</p>`;
+            } else {
+                outputDiv.innerHTML = '<p>Please enter a valid number in the prompt.</p>';
+            }
+        }
+
+        // Set up a listener for user input using window.prompt
+        let userInput = window.prompt('Enter a number:');
+
+        // Check if userInput is not null (i.e., the user clicked OK)
+        if (userInput !== null) {
+            updateOutput(userInput);
+        } else {
+            // Handle the case where the user clicked Cancel or closed the prompt
+            console.log('User canceled or closed the prompt.');
+        }
+    </script>
+
+</body>
+</html>
